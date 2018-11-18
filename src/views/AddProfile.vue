@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-sm-6 offset-sm-3 col-md-2 offset-md-4 pt-4">
+            <div class="col-12 col-sm-6 offset-sm-3 col-md-2 offset-md-4">
                 <h1>Dodawanie profilu</h1>
                 <form @submit.prevent="onSubmit">
                     <div class="form-group">
@@ -44,10 +44,8 @@ export default {
                             storeName: 'app'
                         })
                             .then(( store ) => {
-                                console.log(this.name)
                                 store.getItem('app/profile', )
                                     .then( ( v ) => {
-                                        console.log(v, this.name)
                                         if ( v === null ) {
                                             store.setItem('app/profile', [
                                                 this.name

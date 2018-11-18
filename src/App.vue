@@ -78,6 +78,12 @@ export default {
             left:0;
             right: 0;
             bottom: 0;
+            & > .row {
+                position:absolute;
+                width: 100%;
+                top: 25%;
+                transform: translateY(-50%);
+            }
         }
     }
 }
