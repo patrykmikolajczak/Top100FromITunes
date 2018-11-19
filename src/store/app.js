@@ -1,8 +1,12 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 
-const store = {}
+const store = {
+    profile: {}
+}
 
-const getters = {}
+const getters = {
+    profile: store => store.profile
+}
 
 const actions = {
     stopLoading: () => {
@@ -16,10 +20,14 @@ const actions = {
                 loader.style.display = 'none'
             }, 1000)
         }, 1000)
-    }
+    },
 }
 
-const mutations = {}
+const mutations = {
+    setProfile: (store, data) => {
+        Vue.set(store, 'profile', data)
+    }
+}
 
 export default {
     store,

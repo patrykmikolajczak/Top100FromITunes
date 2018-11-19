@@ -1,9 +1,17 @@
 <template>
+    <div class="component-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-sm-6 offset-sm-3 col-md-2 offset-md-4">
                 <h1>Dodawanie profilu</h1>
                 <form @submit.prevent="onSubmit">
+                    <div class="form-group text-center">
+                        <img 
+                            class="avatar" 
+                            :src="avatar"
+                            alt="Avatar"
+                        />
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nazwa profilu</label>
                         <input 
@@ -25,6 +33,7 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 
 <script>
@@ -32,7 +41,8 @@ export default {
     name: 'add-profile',
     data() {
         return {
-            name: ''
+            name: '',
+            avatar: './img/avatars/avatar2.png'
         }
     },
     methods: {
@@ -48,7 +58,10 @@ export default {
                                     .then( ( v ) => {
                                         if ( v === null ) {
                                             store.setItem('app/profile', [
-                                                this.name
+                                                {
+                                                    name: this.name,
+                                                    img: this.avatar
+                                                }
                                             ])
                                                 .then(() => {
                                                     this.$router.push('/wybierz-profil')
@@ -56,7 +69,10 @@ export default {
                                         } else {
                                             store.setItem('app/profile', [
                                                 ...v,
-                                                this.name
+                                                {
+                                                    name: this.name,
+                                                    img: this.avatar
+                                                }
                                             ])
                                                 .then(() => {
                                                     this.$router.push('/wybierz-profil')
@@ -71,3 +87,14 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    .avatar {
+        vertical-align: middle;
+        width: 100px;
+        height: 100px;
+    }
+    a {
+        color: #ffffff;
+    }
+</style>

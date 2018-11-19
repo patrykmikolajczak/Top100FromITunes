@@ -1,26 +1,27 @@
 <template>
+<div class="component-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 text-center" v-if="profile_list.length > 0">
-                <h1>Jako koto korzystasz?</h1>
+                <h1>Jako kto korzystasz?</h1>
                 <div 
                     class="avatar-box m-1"
                     v-for="(p,i) in profile_list"
                     :key="i"
+                    @click="setProfile(p)"
                 >
                     <img 
-                        src="../assets/img/avatars/avatar2.png" 
+                        :src="p.img" 
                         alt="avatar" class="avatar"
                     />
-                    <h3>{{ p }}</h3>
+                    <h3>{{ p.name }}</h3>
                 </div>
                 <router-link 
                     to="dodaj-profil"
                     class="avatar-box m-1"
-                    :key="i"
                 >
                     <img 
-                        src="../assets/img/avatars/avatar2.png" 
+                        src="../../public/img/avatars/avatar2.png" 
                         alt="avatar" class="avatar-add"
                     />
                     <h3>Dodaj</h3>
@@ -28,6 +29,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -52,6 +54,10 @@ export default {
                             this.profile_list = v
                         })
                 })
+        },
+        setProfile(profile) {
+            this.$store.commit('setProfile', profile)
+            this.$router.push('/')
         }
     }
 }
@@ -63,6 +69,7 @@ export default {
         width: 100px;
         text-align: center;
         cursor: pointer;
+        transition: all 1s;
         .avatar, .avatar-add {
             vertical-align: middle;
             width: 100px;

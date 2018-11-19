@@ -7,9 +7,7 @@
         <router-view/>
     </div> -->
     <div id="app">
-        <div class="component-wrapper">
-            <router-view/>
-        </div>
+        <router-view/>
     </div>
 </template>
 
@@ -44,7 +42,7 @@ export default {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #ffffff;
+    color: #2c3e50;
     opacity: 0;
     transition: all 1s;
     padding: 3%;
@@ -54,7 +52,8 @@ export default {
     .component-wrapper {
         height: 100%;
         background: white;
-        background-image: url('./assets/img/bg.jpg');
+        color: #ffffff;
+        background-image: url('../public/img/bg.jpg');
         background-position: center;
         overflow: hidden;
         position: relative;
