@@ -6,7 +6,7 @@
         <div class="row" slot="body">
             <div class="col-12" v-if="modalData && modalData != ''">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-12 col-md-5">
                         <img 
                             :src="modalData['im:image'][2]['label']" 
                             :height="modalData['im:image'][2]['attributes']['height']"
@@ -14,7 +14,7 @@
                             class="text-center"
                         />
                     </div>
-                    <div class="col-7">
+                    <div class="col-12 col-md-7">
                         <h3>{{ modalData['title']['label'] }}</h3>
                         <p>
                             Cena: {{ modalData['im:price']['label'] }} <br/>
