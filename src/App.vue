@@ -7,13 +7,21 @@
         <router-view/>
     </div> -->
     <div id="app">
-        <router-view/>
+        <div class="component-wrapper">
+            <router-view/>
+        </div>
+        <div class="modal-backdrop fade show" v-show="isModalShowing"></div>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
     name: 'app',
+    computed: {
+        ...mapGetters(['isModalShowing']),
+    },
     mounted() {
         this.$vlf.createInstance({
             storeName: 'app'
@@ -69,7 +77,7 @@ export default {
             right: 0;
             bottom: 0;
         }
-        & > div {
+        & > .container-fluid {
             width: 100%;
             height: 100%;
             position: absolute;
@@ -77,7 +85,8 @@ export default {
             left:0;
             right: 0;
             bottom: 0;
-            & > .row {
+            overflow: auto;
+            &.center-content > .row {
                 position:absolute;
                 width: 100%;
                 top: 25%;

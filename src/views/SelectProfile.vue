@@ -1,6 +1,5 @@
 <template>
-<div class="component-wrapper">
-    <div class="container-fluid">
+    <div class="container-fluid center-content">
         <div class="row">
             <div class="col-12 text-center" v-if="profile_list.length > 0">
                 <h1>Jako kto korzystasz?</h1>
@@ -29,7 +28,6 @@
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>

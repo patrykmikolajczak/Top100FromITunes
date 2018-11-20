@@ -1,8 +1,7 @@
 <template>
-    <div class="component-wrapper">
-    <div class="container-fluid">
+    <div class="container-fluid center-content">
         <div class="row">
-            <div class="col-12 col-sm-6 offset-sm-3 col-md-2 offset-md-4">
+            <div class="col-12 col-sm-6 offset-sm-3 col-md-4 offset-md-4">
                 <h1>Dodawanie profilu</h1>
                 <form @submit.prevent="onSubmit">
                     <div class="form-group text-center">
@@ -32,7 +31,6 @@
                 </form>
             </div>
         </div>
-    </div>
     </div>
 </template>
 

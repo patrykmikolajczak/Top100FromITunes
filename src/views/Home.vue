@@ -1,96 +1,102 @@
 <template>
-    <!-- <div class="component-wrapper"> -->
-        <div class="container-fluid">
-            <div class="row">
+    <div class="container-fluid">
 
-                <div class="col-12 text-center" v-if="profile">
-                    <div 
-                        class="avatar-box m-1"
-                    >
-                        <img 
-                            :src="profile.img" 
-                            alt="avatar" class="avatar"
-                        />
-                        <h3>{{ profile.name }}</h3>
-                    </div>
+        <details-modal />
+
+        <div class="row mt-3">
+
+            <div class="col-12 text-center" v-if="profile">
+                <div 
+                    class="avatar-box m-1"
+                >
+                    <img 
+                        :src="profile.img" 
+                        alt="avatar" class="avatar"
+                    />
+                    <h3>{{ profile.name }}</h3>
                 </div>
-
-                <div class="col-12">
-                    <form>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <select 
-                                    class="custom-select" 
-                                    @change="filterList"
-                                    v-model="category"
-                                >
-                                    <option value="">Wybierz kategorie</option>
-                                    <option 
-                                        v-for="(c,i) in category_list"
-                                        :key="i"
-                                        :value="c"
-                                    >
-                                        {{ c }}
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <select 
-                                    class="custom-select" 
-                                    @change="filterList"
-                                    v-model="author"
-                                >
-                                    <option value="">Wybierz wykonawce</option>
-                                    <option 
-                                        v-for="(a,i) in artist_list"
-                                        :key="i"
-                                        :value="a"
-                                    >
-                                        {{ a }}
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <input 
-                                    type="text" 
-                                    class="form-control" 
-                                    placeholder="Szukaj" 
-                                    @keyup="filterList"
-                                    v-model="search"
-                                >
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="col-12 text-center">
-                    <transition-group name="slide-fade">
-                        <div 
-                            class="album-box m-1"
-                            v-for="(p,i) in albums_list"
-                            :key="i"
-                            :style="`width: ${p['im:image'][2]['attributes']['height']}px`"
-                        >
-                            <div class="album">
-                                <img 
-                                    :src="p['im:image'][2]['label']" 
-                                    :height="p['im:image'][2]['attributes']['height']"
-                                    alt="album"
-                                />
-                                <p>{{ p['title']['label'] }}</p>
-                            </div>
-                        </div>
-                    </transition-group>
-                </div>
-
             </div>
+
+            <div class="col-12">
+                <form>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <select 
+                                class="custom-select" 
+                                @change="filterList"
+                                v-model="category"
+                            >
+                                <option value="">Wybierz kategorie</option>
+                                <option 
+                                    v-for="(c,i) in category_list"
+                                    :key="i"
+                                    :value="c"
+                                >
+                                    {{ c }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select 
+                                class="custom-select" 
+                                @change="filterList"
+                                v-model="author"
+                            >
+                                <option value="">Wybierz wykonawce</option>
+                                <option 
+                                    v-for="(a,i) in artist_list"
+                                    :key="i"
+                                    :value="a"
+                                >
+                                    {{ a }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Szukaj" 
+                                @keyup="filterList"
+                                v-model="search"
+                            >
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-12 text-center">
+                <transition-group name="slide-fade">
+                    <div 
+                        class="album-box m-1"
+                        v-for="(p,i) in albums_list"
+                        :key="i"
+                        :style="`width: ${p['im:image'][2]['attributes']['height']}px`"
+                        @click="showAlbumDetails(p)"
+                    >
+                        <div class="album">
+                            <img 
+                                :src="p['im:image'][2]['label']" 
+                                :height="p['im:image'][2]['attributes']['height']"
+                                alt="album"
+                            />
+                            <p>{{ p['title']['label'] }}</p>
+                        </div>
+                    </div>
+                </transition-group>
+            </div>
+
         </div>
-    <!-- </div> -->
+    </div>
 </template>
 
 <script>
+import DetailsModal from '@/components/DetailsModal'
 export default {
     name: 'home',
+    components: {
+        DetailsModal
+    },
     data() {
         return {
             org_albums_list: [],
@@ -172,6 +178,13 @@ export default {
                 })
             }
 
+        },
+        showAlbumDetails(a) {
+            this.$store.commit('setModalData', {
+                name: 'album_details',
+                value: a,
+                key: 'album'
+            })
         }
     }
 }
