@@ -75,10 +75,10 @@
                         @click="showAlbumDetails(p)"
                     >
                         <div class="album">
-                            <img 
-                                :src="p['im:image'][2]['label']" 
+                            <img
+                                v-img="p['im:image'][2]['label']"
                                 :height="p['im:image'][2]['attributes']['height']"
-                                alt="album"
+                                alt=""
                             />
                             <p>{{ p['title']['label'] }}</p>
                         </div>
@@ -207,12 +207,29 @@ export default {
         cursor: pointer;
         transition: all 1s;
         position: relative;
+        width: 17px;
+        height:170px;
         .album {
             background-color: #42b983;
             & img {
                 vertical-align: middle;
                 backface-visibility: hidden;
-                transition: ease-in-out .3s
+                transition: ease-in-out .3s;
+                &::before {
+                    content: ' ';
+                    box-sizing: border-box;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 20px;
+                    height: 20px;
+                    margin-top: -10px;
+                    margin-left: -10px;
+                    border-radius: 50%;
+                    border: 2px solid #ccc;
+                    border-top-color: #42b983;
+                    animation: spinner .6s linear infinite;
+                }
             }
             &:hover {
                 img {
@@ -232,6 +249,11 @@ export default {
                 color: white;
                 padding: 5px;
             }
+        }
+    }
+    @keyframes spinner {
+        to {
+            transform: rotate(360deg);
         }
     }
     a {

@@ -38,6 +38,18 @@ import './assets/css/app.scss'
 Vue.config.productionTip = false
 Vue.config.performance = true
 
+Vue.directive('img', {
+  inserted: (el, url) => {
+      var img = new Image()
+      img.src = url.value
+      el.style.transition = 'all 1s'
+
+      img.onload = () => {
+          el.src = url.value;
+      }
+  }
+});
+
 new Vue({
   router,
   store,
